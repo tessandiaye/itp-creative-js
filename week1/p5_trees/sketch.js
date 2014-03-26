@@ -1,7 +1,4 @@
-var theta;
-var xstart;
-var xNoise;
-var yNoise; 
+var theta; 
 
 function setup() {
   createCanvas(1280,720);
@@ -10,12 +7,36 @@ function setup() {
 
 function draw() {
   background(0);
+  noStroke();
+  text("Theta = "+theta,50,650);
   theta = map(mouseX,0,width,0,PI/2);
-  translate(width/2, height);
-  stroke(150);
-  for (var i = 0; i <3 ; i++){
-  	branch(225*i);
+  drawBranches();
+}
+
+function drawBranches() {
+  stroke(255,50,50, map(mouseX,0,720,20,90));
+  translate(width/2, 0);
+  rotate(90);
+  for (var i = 0; i <2 ; i++){
+  	branch(250*i);
   }
+  pushMatrix();
+	  rotate(90);
+	  for (var i = 0; i <2 ; i++){
+	  	branch(250*i);
+	  }
+  popMatrix();
+	  branch(50);
+	  rotate(360);
+	  branch(50);
+	  fill(255);
+  pushMatrix();
+	  rotate(180);
+	  translate(600,500);
+	  for (var i = 0; i <2 ; i++){
+	  	branch(250*i);
+	  }
+  popMatrix();
 }
 
 function branch(len) {
@@ -29,20 +50,9 @@ function branch(len) {
     rotate(theta);
     branch(len);
     popMatrix();
-
     pushMatrix();
     rotate(-theta);
     branch(len);
     popMatrix();
   }
-}
-
-function drawPoint(x,y,noiseFactor) {
-  pushMatrix();
-  translate(x,y);
-  rotate(noiseFactor*(radians(90)));
-  stroke(255,50);
-  strokeWeight(2);
-  line(0,0,20,0);
-  popMatrix();
 }
