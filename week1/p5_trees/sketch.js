@@ -1,7 +1,7 @@
 var theta; 
 
 function setup() {
-  createCanvas(1280,720);
+  createCanvas(1440,900);
   smooth();
 }
 
